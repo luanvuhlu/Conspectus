@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Conspectus">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$" />
+      <root url="file://$PROJECT_DIR$/../ConspectusBackend" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/src" />
+      <root url="file://$PROJECT_DIR$/../ConspectusBackend/src/main" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="ConspectusBackend">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../ConspectusBackend" />
+      <root url="file://$PROJECT_DIR$/../LuanvvUtils" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../ConspectusBackend/src/main" />
+      <root url="file://$PROJECT_DIR$/../LuanvvUtils/src/main" />
+    </SOURCES>
+  </library>
+</component>
