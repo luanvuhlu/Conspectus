@@ -7,10 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Conspectus" />
+        <module name="ConspectusBackend" />
+        <module name="LuanvvUtils" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Conspectus" target="1.8" />
+      <module name="ConspectusBackend" target="1.5" />
+      <module name="LuanvvUtils" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

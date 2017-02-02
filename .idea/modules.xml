@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Conspectus.iml" filepath="$PROJECT_DIR$/Conspectus.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../ConspectusBackend/src/ConspectusBackend.iml" filepath="$PROJECT_DIR$/../ConspectusBackend/src/ConspectusBackend.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../LuanvvUtils/src/LuanvvUtils.iml" filepath="$PROJECT_DIR$/../LuanvvUtils/src/LuanvvUtils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ConspectusBackend/ConspectusBackend.iml" filepath="$PROJECT_DIR$/../ConspectusBackend/ConspectusBackend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../LuanvvUtils/LuanvvUtils.iml" filepath="$PROJECT_DIR$/../LuanvvUtils/LuanvvUtils.iml" />
     </modules>
   </component>
 </project>
