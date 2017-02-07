@@ -1,0 +1,47 @@
+<ui:composition template="/WEB-INF/templates/admin/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="top-tile">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Menu Manager</h3>
+            </div>
+        </div>
+    </ui:define>
+    <ui:define name="content">
+        <div class="row">
+            <p:treeTable id="menus" value="#{menuManagerBean.root}" var="menu" selectionMode="single" selection="#{menuManagerBean.selectedNode}">
+                <p:column headerText="Name">
+                    <h:link href="#"><i class="fa fa-windows"></i>#{menu.name}</h:link>
+                </p:column>
+            </p:treeTable>
+
+            <p:contextMenu for="menus">
+                <p:menuitem value="Before" />
+                <p:menuitem value="After" />
+                <p:menuitem value="Add Child" />
+                <p:menuitem value="Edit" />
+                <p:menuitem value="Delete" icon="ui-icon-close"/>
+            </p:contextMenu>
+
+            <p:dialog id="dialog" header="Document Detail" showEffect="fade" widgetVar="documentDialog" modal="true" resizable="false">
+                <p:outputPanel id="documentPanel">
+                    <p:panelGrid  columns="2" columnClasses="label,value" rendered="#{not empty menuManagerBean.selectedNode}">
+                        <h:outputLabel for="name" value="Name: " />
+                        <h:outputText id="name" value="#{menuManagerBean.selectedNode.data.name}" style="font-weight:bold" />
+
+                        <h:outputLabel for="size" value="Size: " />
+                        <h:outputText id="size" value="#{menuManagerBean.selectedNode.data.size}" style="font-weight:bold" />
+
+                        <h:outputLabel for="type" value="Type " />
+                        <h:outputText id="type" value="#{menuManagerBean.selectedNode.data.type}" style="font-weight:bold" />
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </div>
+    </ui:define>
+</ui:composition>

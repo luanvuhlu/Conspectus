@@ -21,6 +21,8 @@ public class NavigationController implements Serializable {
         switch (pageId){
             case "1":
                 return "page1";
+            case "2":
+                return "menu-manager";
         }
         return HOME_PAGE;
     }
@@ -31,5 +33,9 @@ public class NavigationController implements Serializable {
 
     public void setPageId(String pageId) {
         this.pageId = pageId;
+    }
+    public String goToMenuManager(){
+        pageId = "2";
+        return showPage();
     }
 }
