@@ -38,4 +38,8 @@ public class NavigationController implements Serializable {
         pageId = "2";
         return showPage();
     }
+    public String goHome(){
+        pageId = null;
+        return showPage();
+    }
 }
