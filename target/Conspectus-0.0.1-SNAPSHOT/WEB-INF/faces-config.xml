@@ -3,5 +3,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
-
+<navigation-rule>
+    <from-view-id>includes/layout/admin/sidebar-menu.xhtml</from-view-id>
+    <navigation-case>
+        <from-action>#{navigationController.goToMenuManager()}</from-action>
+        <to-view-id>../admin/menu-manager.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
 </faces-config>

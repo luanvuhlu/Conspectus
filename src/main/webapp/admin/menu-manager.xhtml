@@ -16,29 +16,23 @@
         <div class="row">
             <p:treeTable id="menus" value="#{menuManagerBean.root}" var="menu" selectionMode="single" selection="#{menuManagerBean.selectedNode}">
                 <p:column headerText="Menu Name">
-                    <h:link href="#"><i class="fa fa-windows"></i>#{menu.name}</h:link>
+                    <h:link disabled="true"><i class="fa fa-windows"></i> #{menu.name}</h:link>
                 </p:column>
             </p:treeTable>
 
             <p:contextMenu for="menus">
                 <p:menuitem value="Add Child" />
-                <p:menuitem value="Before" />
+                <p:menuitem value="Before"  />
                 <p:menuitem value="After" />
-                <p:menuitem value="Edit" />
+                <p:menuitem value="Edit" icon="ui-icon-edit" update="menuEditPanel" oncomplete="PF('menuEditDialog').show()" />
                 <p:menuitem value="Delete" icon="ui-icon-close"/>
             </p:contextMenu>
 
-            <p:dialog id="dialog" header="Document Detail" showEffect="fade" widgetVar="documentDialog" modal="true" resizable="false">
-                <p:outputPanel id="documentPanel">
+            <p:dialog id="dialog" header="Menu Detail" showEffect="fade" widgetVar="menuEditDialog" modal="true" resizable="false">
+                <p:outputPanel id="menuEditPanel">
                     <p:panelGrid  columns="2" columnClasses="label,value" rendered="#{not empty menuManagerBean.selectedNode}">
                         <h:outputLabel for="name" value="Name: " />
                         <h:outputText id="name" value="#{menuManagerBean.selectedNode.data.name}" style="font-weight:bold" />
-
-                        <h:outputLabel for="size" value="Size: " />
-                        <h:outputText id="size" value="#{menuManagerBean.selectedNode.data.size}" style="font-weight:bold" />
-
-                        <h:outputLabel for="type" value="Type " />
-                        <h:outputText id="type" value="#{menuManagerBean.selectedNode.data.type}" style="font-weight:bold" />
                     </p:panelGrid>
                 </p:outputPanel>
             </p:dialog>

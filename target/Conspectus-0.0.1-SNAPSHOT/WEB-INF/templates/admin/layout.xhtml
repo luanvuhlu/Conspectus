@@ -22,11 +22,11 @@
     <title>
         <ui:insert name="title">#{page.name ne 'home' ? i18n[page.name += '.title'] : ''}</ui:insert>#{page.name ne 'home' ? ' | ' : ''}#{i18n['this.name']}
     </title>
-
     <ui:include src="/WEB-INF/includes/layout/admin/head-resources.xhtml" />
 </h:head>
 
 <h:body styleClass="nav-md">
+    <h:form>
     <div class="container body">
         <div class="main_container">
             <div class="col-md-3 left_col">
@@ -34,9 +34,7 @@
                     <div class="navbar nav_title" style="border: 0;">
                         <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
                     </div>
-
                     <div class="clearfix"></div>
-
                     <!-- menu profile quick info -->
                     <div class="profile">
                         <div class="profile_pic">
@@ -48,15 +46,12 @@
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
-
                     <br />
-
                     <!-- sidebar menu -->
                     <ui:insert name="nav-sidebar">
                         <ui:include src="/WEB-INF/includes/layout/admin/sidebar-menu.xhtml" />
                     </ui:insert>
                     <!-- /sidebar menu -->
-
                     <!-- /menu footer buttons -->
                     <ui:insert name="nav-sidebar-foot">
                         <ui:include src="/WEB-INF/includes/layout/admin/sidebar-menu-foot.xhtml" />
@@ -64,27 +59,21 @@
                     <!-- /menu footer buttons -->
                 </div>
             </div>
-
             <!-- top navigation -->
              <ui:insert name="nav-top">
                 <ui:include src="/WEB-INF/includes/layout/admin/menu-top.xhtml" />
             </ui:insert>
             <!-- /top navigation -->
-
             <!-- page content -->
             <div class="right_col" role="main">
                 <!-- top tiles -->
                 <ui:insert name="top-tile">
-
                 </ui:insert>
                 <!-- /top tiles -->
                 <ui:insert name="content">
-
                 </ui:insert>
-
             </div>
             <!-- /page content -->
-
             <!-- footer content -->
             <ui:insert name="nav-foot">
                 <ui:include src="/WEB-INF/includes/layout/admin/footer.xhtml" />
@@ -93,5 +82,6 @@
         </div>
     </div>
     <ui:include src="/WEB-INF/includes/layout/admin/body-resources.xhtml" />
+    </h:form>
 </h:body>
 </html>
