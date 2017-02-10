@@ -1,6 +1,5 @@
 <ui:composition template="/WEB-INF/templates/admin/layout.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
@@ -21,20 +20,14 @@
             </p:treeTable>
 
             <p:contextMenu for="menus">
-                <p:menuitem value="Add Child" />
-                <p:menuitem value="Before"  />
-                <p:menuitem value="After" />
-                <p:menuitem value="Edit" icon="ui-icon-edit" update="menuEditPanel" oncomplete="PF('menuEditDialog').show()" />
+                <p:menuitem value="Add Child" update="txtMenuName" oncomplete="PF('menuEditDialog').show()" />
+                <p:menuitem value="Before"  update="txtMenuName" oncomplete="PF('menuEditDialog').show()" />
+                <p:menuitem value="After" update="txtMenuName" oncomplete="PF('menuEditDialog').show()" />
+                <p:menuitem value="Edit" icon="ui-icon-edit" update="txtMenuName" oncomplete="PF('menuEditDialog').show()" />
                 <p:menuitem value="Delete" icon="ui-icon-close"/>
             </p:contextMenu>
-
-            <p:dialog id="dialog" header="Menu Detail" showEffect="fade" widgetVar="menuEditDialog" modal="true" resizable="false">
-                <p:outputPanel id="menuEditPanel">
-                    <p:panelGrid  columns="2" columnClasses="label,value" rendered="#{not empty menuManagerBean.selectedNode}">
-                        <h:outputLabel for="name" value="Name: " />
-                        <h:outputText id="name" value="#{menuManagerBean.selectedNode.data.name}" style="font-weight:bold" />
-                    </p:panelGrid>
-                </p:outputPanel>
+            <p:dialog header="Menu Detail" showEffect="fade" widgetVar="menuEditDialog" modal="true" resizable="false">
+                    <h:outputText id="txtMenuName"  value="#{menuManagerBean.selectedNode.data.name}" />
             </p:dialog>
         </div>
     </ui:define>
