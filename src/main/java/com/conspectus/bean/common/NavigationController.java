@@ -1,4 +1,4 @@
-package main.java.com.conspectus.bean.common;
+package com.conspectus.bean.common;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;

@@ -1,4 +1,4 @@
-package main.java.com.conspectus.bean.home;
+package com.conspectus.bean.home;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
