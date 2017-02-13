@@ -2,6 +2,7 @@ package com.conspectus.bean.admin.menu.manager;
 
 import com.conspectus.bean.base.BaseBean;
 import com.conspectus.entity.Menu;
+import com.conspectus.entity.MenuIcon;
 import com.conspectus.service.MenuService;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
@@ -19,8 +20,11 @@ import java.util.List;
 @ApplicationScoped
 public class MenuServiceBean extends BaseBean implements Serializable{
 
+    public List<Menu> getMenuList() throws Exception {
+        return getService().listMenuOrdered();
+    }
     public TreeNode createTreeMenu() throws Exception {
-        List<Menu> menus = getService().listMenuOrdered();
+        List<Menu> menus = getMenuList();
         TreeNode root = new DefaultTreeNode(new Menu(), null);
         for (Menu menu : menus) {
             TreeNode node = createNode(menu, root);
@@ -92,5 +96,9 @@ public class MenuServiceBean extends BaseBean implements Serializable{
             return false;
         }
         return true;
+    }
+
+    public List<MenuIcon> getMenuIconList() throws Exception {
+        return getService().getListMenuIcons();
     }
 }

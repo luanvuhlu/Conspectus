@@ -10,13 +10,18 @@
         <to-view-id>/../admin/menu-manager.xhtml</to-view-id>
     </navigation-case>
     </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/includes/layout/admin/sidebar-menu.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>/</from-outcome>
-            <to-view-id>/../admin/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/admin/menu-manager.xhtml</from-view-id>
+    <from-outcome>/</from-outcome>
+    <to-view-id>/../admin/index.xhtml</to-view-id>
+</navigation-rule>
+<navigation-rule>
+    <from-view-id>/includes/layout/admin/sidebar-menu.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>/</from-outcome>
+        <to-view-id>/../admin/index.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     <!--<component>-->
         <!--<component-type>org.primefaces.component.CommandButton</component-type>-->
         <!--<component-class>com.conspectus.component.primefaces.BlockCommandButton</component-class>-->

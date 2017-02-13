@@ -16,9 +16,9 @@
             <h:form id="form">
                 <p:treeTable id="menus" value="#{ttMenuManagerBean.root}" var="menu" selectionMode="single"
                              selection="#{ttMenuManagerBean.selectedNode}">
-                    <!--<p:ajax event="select" update=":form:menuEditPanel"/>-->
                     <p:column headerText="Name">
                         <i class="fa fa-windows"></i> #{menu.name}
+
                     </p:column>
                     <p:column headerText="Url">
                         <a href="#{menu.url}">#{menu.url}</a>
@@ -26,6 +26,15 @@
                     <p:column headerText="Order">
                         #{menu.order}
                     </p:column>
+                    <f:facet name="footer">
+                        <p:outputPanel style="text-align: left">
+                        <p:commandButton value="Add New Menu"
+                                         update=":dialogForm"
+                                         actionListener="#{ttMenuManagerBean.insertNewMenuLast()}"
+                                         oncomplete="PF('menuEditDialog').show()"
+                                         styleClass="ui-priority-primary" />
+                        </p:outputPanel>
+                    </f:facet>
                 </p:treeTable>
 
                 <p:contextMenu for="menus">
@@ -51,8 +60,8 @@
                       widgetVar="menuEditDialog"
                       modal="true"
                       resizable="false"
-                      closeOnEscape="true"
-                      dynamic="true">
+                      dynamic="true"
+                      closeOnEscape="true">
                 <h:form id="dialogForm">
                     <h:panelGrid columns="2" cellpadding="10" id="menuEditPanel">
                         <h:outputLabel for="txtName" value="Name:"/>
@@ -67,6 +76,15 @@
                         <p:spinner id="txtOrder" value="#{ttMenuManagerBean.activeMenu.order}" min="1"
                                    disabled="#{ttMenuManagerBean.notEdittingMode}" required="true" label="Menu Order">
                         </p:spinner>
+                        <!--<h:outputLabel for="selectIcon" value="Icon:"/>-->
+                        <!--<p:selectOneMenu id="selectIcon"-->
+                                         <!--value="#{ttMenuManagerBean.selectedMenuIcon}"-->
+                                         <!--var="iconSelected" >-->
+                            <!--<f:selectItems value="#{ttMenuManagerBean.menuIconList}" var="icon" itemLabel="#{icon.value}" itemValue="#{icon.value}" />-->
+                            <!--<p:column>-->
+                                <!--<i class="#{iconSelected.value}"></i>-->
+                            <!--</p:column>-->
+                        <!--</p:selectOneMenu>-->
                         <f:facet name="footer">
                             <p:commandButton id="btnSave"
                                              process="@form"

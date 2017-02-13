@@ -2,12 +2,14 @@ package com.conspectus.bean.admin.menu.manager;
 
 import com.conspectus.bean.base.BaseBean;
 import com.conspectus.entity.Menu;
+import com.conspectus.entity.MenuIcon;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.TreeNode;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by luan vu on 2/7/2017.
@@ -15,12 +17,14 @@ import java.io.Serializable;
 @ManagedBean(name = "ttMenuManagerBean")
 @ViewScoped
 public class MenuManagerBean extends BaseBean implements Serializable {
+    private static List<MenuIcon> menuIconList;
     private TreeNode root;
     private TreeNode selectedNode;
     private Menu activeMenu;
     @ManagedProperty("#{menuServiceBean}")
     private MenuServiceBean service;
     private MenuActionType menuActionType;
+    private String selectedMenuIcon;
 
     @PostConstruct
     public void init() {
@@ -29,6 +33,7 @@ public class MenuManagerBean extends BaseBean implements Serializable {
     private void initTree(){
         try{
             root = service.createTreeMenu();
+            menuIconList = service.getMenuIconList();
         }catch (Exception e){
             e.printStackTrace();
             // TODO
@@ -62,6 +67,11 @@ public class MenuManagerBean extends BaseBean implements Serializable {
         menuActionType = MenuActionType.EDIT;
         activeMenu = new Menu((Menu) selectedNode.getData());
     }
+    public void insertNewMenuLast(){
+        menuActionType = MenuActionType.ADD_LAST;
+        activeMenu = new Menu();
+        activeMenu.setOrder(root.getChildren().size()+1);
+    }
     public void insertAfterPrepare(){
         menuActionType = MenuActionType.AFTER;
         activeMenu = new Menu();
@@ -94,6 +104,7 @@ public class MenuManagerBean extends BaseBean implements Serializable {
         switch (menuActionType){
             case BEFORE:
             case AFTER:
+            case ADD_LAST:
             case ADD_CHILD:
                 addMessage("Add Menu", "Success");
                 break;
@@ -126,6 +137,7 @@ public class MenuManagerBean extends BaseBean implements Serializable {
                 return service.update(activeMenu);
             case DELETE:
                 return service.delete(selectedNode);
+            case ADD_LAST:
             case ADD_CHILD:
                 return service.insert(activeMenu);
         }
@@ -146,4 +158,12 @@ public class MenuManagerBean extends BaseBean implements Serializable {
     public void closeMenuEditDialog() {
         RequestContext.getCurrentInstance().execute("PF('menuEditDialog').hide()");
     }
+    public List<MenuIcon> getMenuIconList() throws Exception {
+        // TODO Cache
+        if(menuIconList==null){
+            menuIconList = service.getMenuIconList();
+        }
+        return menuIconList;
+    }
+
 }
