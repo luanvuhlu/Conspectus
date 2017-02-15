@@ -7,7 +7,9 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.model.TreeNode;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.*;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class MenuManagerBean extends BaseBean implements Serializable {
     private void initTree(){
         try{
             root = service.createTreeMenu();
-            menuIconList = service.getMenuIconList();
+            menuIconList = service.lsMenuIconList();
         }catch (Exception e){
             e.printStackTrace();
             // TODO
@@ -66,30 +68,27 @@ public class MenuManagerBean extends BaseBean implements Serializable {
     public void editPrepare(){
         menuActionType = MenuActionType.EDIT;
         activeMenu = new Menu((Menu) selectedNode.getData());
+        selectedMenuIcon = activeMenu.getIcon();
     }
     public void insertNewMenuLast(){
         menuActionType = MenuActionType.ADD_LAST;
-        activeMenu = new Menu();
-        activeMenu.setOrder(root.getChildren().size()+1);
+        activeMenu = new Menu(root.getChildren().size()+1);
     }
     public void insertAfterPrepare(){
         menuActionType = MenuActionType.AFTER;
-        activeMenu = new Menu();
-        activeMenu.setOrder(getSelectedMenu().getOrder()+1);
+        activeMenu = new Menu(getSelectedMenu().getOrder()+1);
     }
 
     public void insertBeforePrepare(){
         menuActionType = MenuActionType.BEFORE;
-        activeMenu = new Menu();
-        activeMenu.setOrder(getSelectedMenu().getOrder());
+        activeMenu = new Menu(getSelectedMenu().getOrder());
     }
 
     public void addChildPrepare(){
         menuActionType = MenuActionType.ADD_CHILD;
         Menu parentMenu = getSelectedMenu();
-        activeMenu = new Menu();
+        activeMenu = new Menu(parentMenu.getChildren().size()+1);
         activeMenu.setParent(parentMenu);
-        activeMenu.setOrder(parentMenu.getChildren().size()+1);
     }
 
     private Menu getSelectedMenu(){
@@ -125,20 +124,26 @@ public class MenuManagerBean extends BaseBean implements Serializable {
         }else{
             addMessage(null, "ERROR");
         }
-
+    }
+    private void prepareBeforeSaveOrUpdate(){
+        activeMenu.setIcon(getSelectedMenuIcon());
     }
     private boolean runAction(){
         switch (menuActionType){
             case BEFORE:
-                return service.insertBefore(selectedNode, activeMenu);
+                prepareBeforeSaveOrUpdate();
+                return service.insertBefore(activeMenu);
             case AFTER:
-                return service.insertAfter(selectedNode, activeMenu);
+                prepareBeforeSaveOrUpdate();
+                return service.insertAfter(activeMenu);
             case EDIT:
+                prepareBeforeSaveOrUpdate();
                 return service.update(activeMenu);
             case DELETE:
                 return service.delete(selectedNode);
             case ADD_LAST:
             case ADD_CHILD:
+                prepareBeforeSaveOrUpdate();
                 return service.insert(activeMenu);
         }
         return true;
@@ -161,9 +166,16 @@ public class MenuManagerBean extends BaseBean implements Serializable {
     public List<MenuIcon> getMenuIconList() throws Exception {
         // TODO Cache
         if(menuIconList==null){
-            menuIconList = service.getMenuIconList();
+            menuIconList = service.lsMenuIconList();
         }
         return menuIconList;
     }
 
+    public String getSelectedMenuIcon() {
+        return selectedMenuIcon;
+    }
+
+    public void setSelectedMenuIcon(String selectedMenuIcon) {
+        this.selectedMenuIcon = selectedMenuIcon;
+    }
 }

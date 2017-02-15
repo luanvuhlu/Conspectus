@@ -9,7 +9,6 @@ import org.primefaces.model.TreeNode;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,12 +18,12 @@ import java.util.List;
 @ManagedBean(name = "menuServiceBean")
 @ApplicationScoped
 public class MenuServiceBean extends BaseBean implements Serializable{
-
-    public List<Menu> getMenuList() throws Exception {
+    public List<Menu> lsMenuList() throws Exception {
         return getService().listMenuOrdered();
     }
+
     public TreeNode createTreeMenu() throws Exception {
-        List<Menu> menus = getMenuList();
+        List<Menu> menus = lsMenuList();
         TreeNode root = new DefaultTreeNode(new Menu(), null);
         for (Menu menu : menus) {
             TreeNode node = createNode(menu, root);
@@ -42,7 +41,7 @@ public class MenuServiceBean extends BaseBean implements Serializable{
         return new DefaultTreeNode(menu, parent);
     }
 
-    public boolean insertAfter(TreeNode selectedNode, Menu activeMenu){
+    public boolean insertAfter(Menu activeMenu){
         MenuService service = getService();
         try {
             service.addAfter(activeMenu);
@@ -53,7 +52,7 @@ public class MenuServiceBean extends BaseBean implements Serializable{
         return true;
     }
 
-    public boolean insertBefore(TreeNode selectedNode, Menu activeMenu){
+    public boolean insertBefore(Menu activeMenu){
         MenuService service = getService();
         try {
             service.addBefore(activeMenu);
@@ -98,7 +97,7 @@ public class MenuServiceBean extends BaseBean implements Serializable{
         return true;
     }
 
-    public List<MenuIcon> getMenuIconList() throws Exception {
+    public List<MenuIcon> lsMenuIconList() throws Exception {
         return getService().getListMenuIcons();
     }
 }

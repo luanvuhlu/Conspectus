@@ -17,7 +17,7 @@
                 <p:treeTable id="menus" value="#{ttMenuManagerBean.root}" var="menu" selectionMode="single"
                              selection="#{ttMenuManagerBean.selectedNode}">
                     <p:column headerText="Name">
-                        <i class="fa fa-windows"></i> #{menu.name}
+                        <i class="#{menu.icon}"></i> #{menu.name}
 
                     </p:column>
                     <p:column headerText="Url">
@@ -76,15 +76,17 @@
                         <p:spinner id="txtOrder" value="#{ttMenuManagerBean.activeMenu.order}" min="1"
                                    disabled="#{ttMenuManagerBean.notEdittingMode}" required="true" label="Menu Order">
                         </p:spinner>
-                        <!--<h:outputLabel for="selectIcon" value="Icon:"/>-->
-                        <!--<p:selectOneMenu id="selectIcon"-->
-                                         <!--value="#{ttMenuManagerBean.selectedMenuIcon}"-->
-                                         <!--var="iconSelected" >-->
-                            <!--<f:selectItems value="#{ttMenuManagerBean.menuIconList}" var="icon" itemLabel="#{icon.value}" itemValue="#{icon.value}" />-->
-                            <!--<p:column>-->
-                                <!--<i class="#{iconSelected.value}"></i>-->
-                            <!--</p:column>-->
-                        <!--</p:selectOneMenu>-->
+                        <h:outputLabel for="selectIcon" value="Icon:"/>
+                        <p:selectOneMenu id="selectIcon"
+                                         value="#{ttMenuManagerBean.selectedMenuIcon}"
+                                         filter="true"
+                                         filterMatchMode="startsWith"
+                                         var="iconSelected" >
+                            <f:selectItems value="#{ttMenuManagerBean.menuIconList}" var="icon" itemLabel="#{icon.name}" itemValue="#{icon.value}" />
+                            <p:column>
+                                <i class="#{iconSelected.value}">#{icon.name}</i>
+                            </p:column>
+                        </p:selectOneMenu>
                         <f:facet name="footer">
                             <p:commandButton id="btnSave"
                                              process="@form"
